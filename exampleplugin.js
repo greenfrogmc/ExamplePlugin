@@ -120,12 +120,13 @@ module.exports = {
         const form = new Form();
 
         // Set form properties
-        form.type = FormTypes.CUSTOMFORM; // Form types: CUSTOMFORM, FORM
+        form.type = FormTypes.CUSTOMFORM; // Form types: CUSTOMFORM, FORM (legacy)
         form.title = "Title"; // Must be a string
         form.id = 0; // Must be a number
         form.buttons = [{ text: "Button" }]; // Must be a JSON object
-        // form.actions = "content" Sets the text for the form. (must be a string) | WARNING >>> works only for FORM type (not CUSTOMFORM). If you want to use custom form see the code below 
-
+        // form.actions = "content" | Sets the text for the form. (must be a string) | WARNING >>> works only for FORM type (not CUSTOMFORM). If you want to use custom form see the code below 
+        // ^ WARNING: in order to make the legacy FORM type work you must set the form.actions to text that you want to show, if you don't have the text, that u want to show set this to an empty string: ""
+        
         // Add form inputs | WARNING >>> (works ONLY for CUSTOMFORM type)
         form.addInput("Hello, world", "Placeholder"); // text and placeholder
         form.addText("text"); // text only
