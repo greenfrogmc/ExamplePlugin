@@ -124,8 +124,9 @@ module.exports = {
         form.title = "Title"; // Must be a string
         form.id = 0; // Must be a number
         form.buttons = [{ text: "Button" }]; // Must be a JSON object
+        // form.actions = "content" Sets the text for the form. (must be a string) | WARNING >>> works only for FORM type (not CUSTOMFORM). If you want to use custom form see the code below 
 
-        // Add form inputs (only for CUSTOMFORM type)
+        // Add form inputs | WARNING >>> (works ONLY for CUSTOMFORM type)
         form.addInput("Hello, world", "Placeholder"); // text and placeholder
         form.addText("text"); // text only
         form.addDropdown("dropdown", ["Option 1", "Option 2", "Option 3"]); // dropdown label and options array
