@@ -116,20 +116,23 @@ module.exports = {
         actionbar.setType(Titles.ACTIONBAR)
         actionbar.send(player)
 
+        // Create a new form
         const form = new Form();
-        // REMEMBER: FormTypes.FORM is supported, but is has very limited functionality. FormTypes.CUSTOMFORM is better
-        form.type = FormTypes.CUSTOMFORM;
-        form.title = "Title";
-        form.id = 0;
-        form.buttons = [{ text: "Button" }];
-        form.addInput("Hello, world", "Placeholder");
-        //            ^ text          ^ placeholder
-        form.addText("text");
-        form.addDropdown("dropdown", ["Option 1", "Option 2", "Option 3"]);
-        //               ^ dropdown  ^ options (null to disable)
-        form.addToggle("Toggle");
-        form.addSlider("slider", 0, 100, 50);
-        //             ^ text   ^min ^max ^ step
+
+        // Set form properties
+        form.type = FormTypes.CUSTOMFORM; // Form types: CUSTOMFORM, FORM
+        form.title = "Title"; // Must be a string
+        form.id = 0; // Must be a number
+        form.buttons = [{ text: "Button" }]; // Must be a JSON object
+
+        // Add form inputs (only for CUSTOMFORM type)
+        form.addInput("Hello, world", "Placeholder"); // text and placeholder
+        form.addText("text"); // text only
+        form.addDropdown("dropdown", ["Option 1", "Option 2", "Option 3"]); // dropdown label and options array
+        form.addToggle("Toggle"); // toggle label
+        form.addSlider("slider", 0, 100, 50); // slider label, (min, max, and step)
+
+        // Send the form to a player/client
         form.send(player);
 
         player.setTime(17000); // Updates the player time
