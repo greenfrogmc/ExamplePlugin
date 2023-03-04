@@ -19,10 +19,11 @@ const GameMode = require("../../src/player/GameMode");
 
 const Logger = require("../../src/server/Logger");
 const Title = require("../../src/player/Title");
-const Form = require("../../src/player/Form");
+const DefaultForm = require("../../src/player/forms/DefaultForm");
+const CustomForm = require("../../src/player/forms/CustomForm");
+const ModalForm = require("../../src/player/forms/ModalForm");
 const Colors = require("../../src/player/Colors");
 const LogTypes = require("../../src/server/LogTypes");
-const FormTypes = require("../../src/player/FormTypes");
 const Titles = require("../../src/network/packets/types/Titles");
 
 // This is a simple plugin that tests the GreenFrog's API
@@ -120,26 +121,34 @@ module.exports = {
         actionbar.setType(Titles.ACTIONBAR)
         actionbar.send(player)
 
-        // Create a new form
-        const form = new Form();
+        const normalform = new DefaultForm()
+        normalform.text = "Sample Text"
+        normalform.id = 1
+        normalform.buttons = [
+          { text: "Sample button 1" },
+          { text: "Sample button 2" },
+          { text: "Sample button 3" },          
+        ]
+        normalform.title = "Sample normal form"
+        normalform.send(player)
 
-        // Set form properties
-        form.type = FormTypes.CUSTOMFORM; // Form types: CUSTOMFORM, FORM (legacy)
-        form.title = "Title"; // Must be a string
-        form.id = 0; // Must be a number
-        form.buttons = [{ text: "Button" }]; // Must be a JSON object. Not supported in CUSTOMFORM type
-        // form.actions = "content" | Sets the text for the form. (must be a string) | WARNING >>> works only for FORM type (not CUSTOMFORM). If you want to use custom form see the code below 
-        // ^ WARNING: in order to make the legacy FORM type work you must set the form.actions to text that you want to show, if you don't have the text, that u want to show set this to an empty string: ""
-        
-        // Add form inputs | WARNING >>> (works ONLY for CUSTOMFORM type)
-        form.addInput("Hello, world", "Placeholder"); // text and placeholder
-        form.addText("text"); // text only
-        form.addDropdown("dropdown", ["Option 1", "Option 2", "Option 3"]); // dropdown label and options array
-        form.addToggle("Toggle"); // toggle label
-        form.addSlider("slider", 0, 100, 50); // slider label, (min, max, and step)
+        const modalform = new ModalForm()
+        modalform.id = 2
+        modalform.title = "Sample modal form"
+        modalform.text = "Sample Text"
+        modalform.button1 = "Sample button2 1"
+        modalform.button2 = "Sample button 2"
+        modalform.send(player)
 
-        // Send the form to a player/client
-        form.send(player);
+        const customform = new CustomForm()
+        customform.title = "Sample custom form"
+        //customform.buttons = [] // Buttons are not supported in CustomForms!
+        customform.addInput("Sample Input", "Sample Placeholder"); // text and placeholder
+        customform.addText("Sample text"); // text only
+        customform.addDropdown("Sample dropdown", ["Sample Option 1", "Sample Option 2", "Sample Option 3"]); // dropdown label and options array
+        customform.addToggle("Sample toggle"); // toggle label
+        customform.addSlider("Sample slider", 0, 100, 50); // slider label, (min, max, and step)
+        customform.send(player)
 
         player.setTime(17000); // Updates the player time
 
