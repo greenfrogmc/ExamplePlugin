@@ -23,6 +23,7 @@ const Form = require("../../src/player/Form");
 const Colors = require("../../src/player/Colors");
 const FormTypes = require("../../src/player/FormTypes");
 const Titles = require("../../src/network/packets/types/Titles");
+const LogTypes = require("../../src/server/LogTypes");
 
 // This is a simple plugin that tests the GreenFrog's API
 // Another example: https://github.com/greenfrogmc/DonationsPlugin
@@ -32,6 +33,9 @@ const Titles = require("../../src/network/packets/types/Titles");
 module.exports = {
   onLoad() {
     Logger.log(`Example > Hello, world`);
+    Logger.log(`Example > This is an warning`, LogTypes.WARNING);
+    Logger.log(`Example > This is an debug message (will show only if debug in config is enabled)`, LogTypes.DEBUG);
+    Logger.log(`Example > This is an error`, LogTypes.ERROR);
   },
 
   onShutdown() {
@@ -206,4 +210,8 @@ module.exports = {
     // c) Player inputs text into form
     // d) Player selects an option in a form
   },
+
+  BlockBreakEvent(server, client, data) {
+    Logger.log('Block broken! ' + JSON.stringify(data))
+  }
 };
