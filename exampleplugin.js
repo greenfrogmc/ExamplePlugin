@@ -21,9 +21,9 @@ const Logger = require("../../src/server/Logger");
 const Title = require("../../src/player/Title");
 const Form = require("../../src/player/Form");
 const Colors = require("../../src/player/Colors");
+const LogTypes = require("../../src/server/LogTypes");
 const FormTypes = require("../../src/player/FormTypes");
 const Titles = require("../../src/network/packets/types/Titles");
-const LogTypes = require("../../src/server/LogTypes");
 
 // This is a simple plugin that tests the GreenFrog's API
 // Another example: https://github.com/greenfrogmc/DonationsPlugin
